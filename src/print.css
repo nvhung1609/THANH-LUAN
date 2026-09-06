@@ -1,0 +1,94 @@
+/* print.css - Định dạng xuất in ấn chuẩn khổ giấy A4 theo quy chuẩn văn bản Việt Nam */
+
+@media print {
+  /* Ẩn các thành phần giao diện web khi in */
+  .no-print,
+  .app-header,
+  .dashboard-actions,
+  .quick-edit-btn,
+  .modal-overlay,
+  .tab-navigation,
+  .qr-modal,
+  .signature-actions,
+  .watermark-banner {
+    display: none !important;
+  }
+
+  /* Cài đặt khổ giấy A4 chuẩn */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 20mm; /* Lề trên 12mm, phải 15mm, dưới 15mm, trái 20mm */
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-family: "Noto Serif", "Times New Roman", serif !important;
+    font-size: 13pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .app-container {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .a4-document-wrapper {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+
+  /* Mỗi trang A4 ngắt trang chuẩn xác */
+  .a4-page {
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 0 0 10mm 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .a4-page:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  /* Giữ khối ký tên và bảng biểu không bị ngắt ngang trang */
+  .keep-together,
+  .signature-section,
+  .article-block,
+  .a4-table,
+  .timeline-legal-table {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Đảm bảo đường viền và nét chữ sắc nét */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  table, th, td {
+    border: 1px solid #1e293b !important;
+  }
+
+  th {
+    background-color: #f1f5f9 !important;
+    font-weight: 700 !important;
+  }
+
+  .party-signature-box {
+    border: 1px dashed #94a3b8 !important;
+  }
+}
