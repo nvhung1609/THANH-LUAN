@@ -65,9 +65,21 @@ export default function PaymentQRCode({ isOpen, onClose, financials, partyA, par
     setTimeout(() => setCopiedField(null), 2000);
   };
 
+  // Địa chỉ cơ sở thi công chuẩn hóa
+  const workshopAddress = partyA?.address 
+    ? partyA.address.replace('Phường ', 'P. ').replace('Thành phố ', 'TP. ') 
+    : '198/11 Đinh Công Chánh, P. Long Tuyền, TP. Cần Thơ';
+
   // Tải về toàn bộ tấm thẻ thanh toán VIP (khung vàng, nền nhung đỏ, logo, STK, mã QR, slogan)
-  const handleDownloadCard = () => {
+  const handleDownloadCard = async () => {
     setIsDownloading(true);
+    try {
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+    } catch (e) {
+      console.warn('Font loading wait:', e);
+    }
     const img = new Image();
     img.crossOrigin = 'anonymous';
 
@@ -215,17 +227,13 @@ export default function PaymentQRCode({ isOpen, onClose, financials, partyA, par
         ctx.fillText('MB Bank — Chi Nhánh Tây Đô (Cần Thơ)', detailX, 454);
 
         // Mục 4: Cơ sở thi công
-        ctx.font = 'bold 16px "Be Vietnam Pro", sans-serif';
+        ctx.font = 'bold 16px "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
         ctx.fillStyle = '#fed7aa';
-        ctx.fillText('CƠ SỞ THI CÔNG:', detailX, 512);
+        ctx.fillText('CƠ SỞ THI CÔNG:', detailX, 510);
 
-        ctx.font = '500 23px "Be Vietnam Pro", sans-serif';
+        ctx.font = '500 22px "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
         ctx.fillStyle = '#f1f5f9';
-        ctx.fillText('198 Đinh Công Chánh, P. Long Tuyền, TP. Cần Thơ', detailX, 548);
-
-        ctx.font = '500 23px "Be Vietnam Pro", sans-serif';
-        ctx.fillStyle = '#f1f5f9';
-        ctx.fillText('198 Đinh Công Chánh, P. Long Tuyền, TP. Cần Thơ', detailX, 542);
+        ctx.fillText(workshopAddress, detailX, 546, 640);
 
         // 9. Đường kẻ phân cách Footer
         ctx.lineWidth = 1.5;
@@ -270,7 +278,7 @@ export default function PaymentQRCode({ isOpen, onClose, financials, partyA, par
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '660px' }}>
+      <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '680px' }}>
         {/* Modal Header */}
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -386,8 +394,8 @@ export default function PaymentQRCode({ isOpen, onClose, financials, partyA, par
 
                 {/* Địa chỉ cơ sở */}
                 <div className="luxury-detail-item">
-                  <span className="luxury-detail-label">Cơ Sở Thi Công:</span>
-                  <span className="luxury-detail-sub">198 Đinh Công Chánh, P. Long Tuyền, TP. Cần Thơ</span>
+                  <span className="luxury-detail-label">CƠ SỞ THI CÔNG:</span>
+                  <span className="luxury-detail-sub">{workshopAddress}</span>
                 </div>
               </div>
             </div>

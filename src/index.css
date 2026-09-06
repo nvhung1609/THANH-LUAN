@@ -1346,8 +1346,8 @@ body {
 
 .luxury-card-body {
   display: grid;
-  grid-template-columns: 215px 1fr;
-  gap: 20px;
+  grid-template-columns: 190px 1fr;
+  gap: 18px;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -1365,7 +1365,7 @@ body {
   justify-content: center;
   aspect-ratio: 1 / 1;
   width: 100%;
-  max-width: 215px;
+  max-width: 190px;
   box-sizing: border-box;
 }
 
